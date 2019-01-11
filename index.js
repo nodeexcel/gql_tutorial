@@ -6,36 +6,36 @@ var graphql = require('graphql');
 const users = [
     {
         id: 1,
-        name : "manish"
+        name: "manish"
     },
     {
         id: 2,
-        name : "test"
+        name: "test"
     },
     {
         id: 3,
-        name : "test2"
+        name: "test2"
     }
 ]
 
 const address = [
     {
         id: 1,
-        address : "test",
+        address: "test",
         country: "IN",
         phone: "000",
         user_id: 1
     },
     {
         id: 2,
-        address : "test2",
+        address: "test2",
         country: "IN",
         phone: "2222",
         user_id: 1
     },
     {
         id: 3,
-        address : "test3",
+        address: "test3",
         country: "IN",
         phone: "3333",
         user_id: 2
@@ -45,16 +45,16 @@ const address = [
 const countryEnumType = new graphql.GraphQLEnumType({
     name: 'countryEnum',
     values: {
-      IN: {
-        value: "IN",
-      },
-      US: {
-        value: "US",
-      }
+        IN: {
+            value: "IN",
+        },
+        US: {
+            value: "US",
+        }
     },
-  });
+});
 
-  
+
 var addressType = new graphql.GraphQLObjectType({
     name: "address",
     fields: {
@@ -76,13 +76,10 @@ var profileType = new graphql.GraphQLObjectType({
         },
         address: {
             type: graphql.GraphQLNonNull(new graphql.GraphQLList(addressType)),
-            resolve: () => {
-                return [{
-                    id: "1",
-                    address: "Noida",
-                    country: "IN",
-                    phone: "99999"
-                }]
+            resolve: (user) => {
+                return address.filter((addr) => {
+                    return addr.user_id == user.id
+                })
             }
         }
     }
@@ -91,25 +88,15 @@ var profileType = new graphql.GraphQLObjectType({
 var queryType = new graphql.GraphQLObjectType({
     name: 'Query',
     fields: {
-        hello: {
-            type: graphql.GraphQLString,
-            resolve: (_) => {
-                return "test"
-            }
-        },
-        number: {
-            type: graphql.GraphQLInt,
-            resolve: () => {
-                return Math.round(Math.random() * 100, 0)
-            }
-        },
         profile: {
             type: profileType,
-            resolve: () => {
-                return {
-                    id: "1",
-                    name: "Manish"
-                }
+            args: {
+                id: { type: graphql.GraphQLNonNull(graphql.GraphQLInt) }
+            },
+            resolve: (_, { id }) => {
+                return users.find((user) => {
+                    return user.id == id
+                })
             }
         }
     }
