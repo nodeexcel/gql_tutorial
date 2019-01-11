@@ -2,6 +2,39 @@ var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var graphql = require('graphql');
 
+var addressType = new graphql.GraphQLObjectType({
+    name: "address",
+    fields: {
+        id: { type: graphql.GraphQLID },
+        address: { type: graphql.GraphQLString },
+        country: { type: graphql.GraphQLString },
+        phone: { type: graphql.GraphQLString }
+    }
+})
+
+var profileType = new graphql.GraphQLObjectType({
+    name: 'Profile',
+    fields: {
+        id: {
+            type: graphql.GraphQLID
+        },
+        name: {
+            type: graphql.GraphQLString
+        },
+        address: {
+            type: addressType!,
+            resolve: () => {
+                return {
+                    id: "1",
+                    address: "Noida",
+                    country: "IN",
+                    phone: "99999"
+                }
+            }
+        }
+    }
+})
+
 var queryType = new graphql.GraphQLObjectType({
     name: 'Query',
     fields: {
@@ -12,9 +45,18 @@ var queryType = new graphql.GraphQLObjectType({
             }
         },
         number: {
-            type: graphql.GraphQLID,
+            type: graphql.GraphQLInt,
             resolve: () => {
-                return Math.round(Math.random() * 100 , 0)
+                return Math.round(Math.random() * 100, 0)
+            }
+        },
+        profile: {
+            type: profileType,
+            resolve: () => {
+                return {
+                    id: "1",
+                    name: "Manish"
+                }
             }
         }
     }
