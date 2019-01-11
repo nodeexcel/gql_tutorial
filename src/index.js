@@ -2,9 +2,10 @@ var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var graphql = require('graphql');
 
-import queryType from './queries/user'
+import profileQuery from './queries/user'
+import todoQuery from './queries/todo'
 
-var schema = new graphql.GraphQLSchema({ query: queryType });
+var schema = new graphql.GraphQLSchema({ query:  });
 
 var app = express();
 app.use('/graphql', graphqlHTTP({
