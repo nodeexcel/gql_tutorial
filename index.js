@@ -22,7 +22,7 @@ var profileType = new graphql.GraphQLObjectType({
             type: graphql.GraphQLString
         },
         address: {
-            type: addressType!,
+            type: graphql.GraphQLNonNull(addressType),
             resolve: () => {
                 return {
                     id: "1",
