@@ -2,12 +2,25 @@ var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var graphql = require('graphql');
 
+const countryEnumType = new graphql.GraphQLEnumType({
+    name: 'countryEnum',
+    values: {
+      IN: {
+        value: "IN",
+      },
+      US: {
+        value: "US",
+      }
+    },
+  });
+
+  
 var addressType = new graphql.GraphQLObjectType({
     name: "address",
     fields: {
         id: { type: graphql.GraphQLID },
         address: { type: graphql.GraphQLString },
-        country: { type: graphql.GraphQLString },
+        country: { type: countryEnumType },
         phone: { type: graphql.GraphQLString }
     }
 })
@@ -22,14 +35,14 @@ var profileType = new graphql.GraphQLObjectType({
             type: graphql.GraphQLString
         },
         address: {
-            type: graphql.GraphQLNonNull(addressType),
+            type: graphql.GraphQLNonNull(new graphql.GraphQLList(addressType)),
             resolve: () => {
-                return {
+                return [{
                     id: "1",
                     address: "Noida",
                     country: "IN",
                     phone: "99999"
-                }
+                }]
             }
         }
     }
