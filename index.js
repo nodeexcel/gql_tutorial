@@ -10,6 +10,12 @@ var queryType = new graphql.GraphQLObjectType({
             resolve: (_) => {
                 return "test"
             }
+        },
+        number: {
+            type: graphql.GraphQLID,
+            resolve: () => {
+                return Math.round(Math.random() * 100 , 0)
+            }
         }
     }
 });
