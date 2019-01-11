@@ -2,29 +2,9 @@ var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var graphql = require('graphql');
 
-import profileType from "./schema/profile"
-import data from "./data"
-
-var queryType = new graphql.GraphQLObjectType({
-    name: 'Query',
-    fields: {
-        profile: {
-            type: profileType,
-            args: {
-                id: { type: graphql.GraphQLNonNull(graphql.GraphQLInt) }
-            },
-            resolve: async (_, { id }) => {
-                let users = await data.getUsers()
-                return users.find((user) => {
-                    return user.id == id
-                })
-            }
-        }
-    }
-});
+import queryType from './queries/user'
 
 var schema = new graphql.GraphQLSchema({ query: queryType });
-
 
 var app = express();
 app.use('/graphql', graphqlHTTP({
