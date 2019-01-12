@@ -1,26 +1,20 @@
-import profileType from "../schema/profile"
-import data from "../data"
-
-import {
-    GraphQLObjectType,
-    GraphQLNonNull,
-    GraphQLInt
-} from "graphql"
-
-export default new GraphQLObjectType({
-    name: 'Query',
-    fields: {
-        profile: {
-            type: profileType,
-            args: {
-                id: { type: GraphQLNonNull(GraphQLInt) }
-            },
-            resolve: async (_, { id }) => {
-                let users = await data.getUsers()
-                return users.find((user) => {
-                    return user.id == id
-                })
-            }
-        }
-    }
-});
+export default `
+enum CountryAllowed {
+    IN,
+    US
+}   
+type Address {
+    id: ID!,
+    address: String,
+    country: CountryAllowed,
+    phone: String
+}
+ type Profile {
+     id: ID!,
+     name: String,
+     address: [Address]
+ }
+ type Query {
+     profile (id: Int!) : Profile
+ }
+`

@@ -1,11 +1,18 @@
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
-var graphql = require('graphql');
+import { makeExecutableSchema , addMockFunctionsToSchema } from 'graphql-tools';
 
-import profileQuery from './queries/user'
-import todoQuery from './queries/todo'
 
-var schema = new graphql.GraphQLSchema({ query:  });
+import typeDefs from './queries/user'
+import resolvers from './resolvers/user'
+
+const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers
+});
+
+// addMockFunctionsToSchema({ schema });
+
 
 var app = express();
 app.use('/graphql', graphqlHTTP({
