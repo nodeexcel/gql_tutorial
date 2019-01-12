@@ -1,15 +1,8 @@
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
-import { makeExecutableSchema , addMockFunctionsToSchema } from 'graphql-tools';
 
+import schema from "./schema"
 
-import typeDefs from './queries/user'
-import resolvers from './resolvers/user'
-
-const schema = makeExecutableSchema({
-    typeDefs,
-    resolvers
-});
 
 // addMockFunctionsToSchema({ schema });
 
