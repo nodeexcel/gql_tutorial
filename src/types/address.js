@@ -1,4 +1,4 @@
-export default `
+export const addressType = `
 enum CountryAllowed {
     IN,
     US
@@ -9,3 +9,4 @@ type Address {
     country: CountryAllowed,
     phone: String
 }`
+

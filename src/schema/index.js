@@ -9,6 +9,5 @@ export default mergeSchemas({
     schemas: [
         todoQuery,
         userQuery
-    ],
-    resolvers: resolvers
+    ]
 });
