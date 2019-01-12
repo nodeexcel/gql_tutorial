@@ -1,6 +1,11 @@
-import { makeExecutableSchema } from "graphql-tools"
-
-export default makeExecutableSchema({
-    typeDefs: `
-        `
-})
+export default `
+enum CountryAllowed {
+    IN,
+    US
+}   
+type Address {
+    id: ID!,
+    address: String,
+    country: CountryAllowed,
+    phone: String
+}`

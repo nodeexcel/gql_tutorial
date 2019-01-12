@@ -1,23 +1,14 @@
 import { makeExecutableSchema } from "graphql-tools"
 
+import addressType from "../types/address"
+import profileType from "../types/profile"
+
+const profileQuery = `
+type Query {
+    profile (id: Int!) : Profile
+}
+`
+
 export default makeExecutableSchema({
-    typeDefs: `
-        enum CountryAllowed {
-            IN,
-            US
-        }   
-        type Address {
-            id: ID!,
-            address: String,
-            country: CountryAllowed,
-            phone: String
-        }
-        type Profile {
-            id: ID!,
-            name: String,
-            address: [Address]
-        }
-        type Query {
-            profile (id: Int!) : Profile
-        }
-`})
+    typeDefs: [addressType, profileType, profileQuery]
+})
