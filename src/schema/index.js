@@ -1,15 +1,13 @@
-import addressType from "../types/address"
-import profileType from "../types/profile"
 import userQuery from "../queries/user"
+import todoQuery from "../queries/todo"
 
 import resolvers from "../resolvers/user"
 
 import { mergeSchemas } from "graphql-tools"
 
-export const schema = mergeSchemas({
+export default mergeSchemas({
     schemas: [
-        addressType,
-        profileType,
+        todoQuery,
         userQuery
     ],
     resolvers: resolvers
