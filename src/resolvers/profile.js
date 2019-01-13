@@ -16,5 +16,10 @@ export default {
                 return addr.user_id == user.id
             })
         }
+    },
+    Mutation: {
+        addProfile : async (_, {name }) => {
+            return await data.addProfile(name)
+        }
     }
 }
