@@ -1,5 +1,3 @@
-import { makeExecutableSchema, addMockFunctionsToSchema } from "graphql-tools"
-
 import addressType from "../types/address"
 
 import profileType from "../types/profile"
@@ -32,27 +30,25 @@ type Mutation {
 import todoQuery from "../queries/todo"
 import todoType from "../types/todo"
 
+export const typeDefs = [
+    queryType,
+    addressType,
+    profileType,
+    userType,
+    userQuery,
+    profileQuery,
+    todoType,
+    todoQuery,
+    mutationType,
+    profileMutation,
+    todoMutation,
+    todoSubscription]
 
-const schema = makeExecutableSchema({
-    typeDefs: [
-        queryType,
-        addressType,
-        profileType,
-        userType,
-        userQuery,
-        profileQuery,
-        todoType,
-        todoQuery,
-        mutationType,
-        profileMutation,
-        todoMutation,
-        todoSubscription],
-    resolvers: [profileResolver, userResolver]
-})
+export const resolvers = [profileResolver, userResolver]
 
-addMockFunctionsToSchema({
-    schema: schema,
-    preserveResolvers: true
-})
+// addMockFunctionsToSchema({
+//     schema: schema,
+//     preserveResolvers: true
+// })
 
-export default schema
+// export default schema
