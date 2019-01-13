@@ -1,13 +1,11 @@
-import userQuery from "../queries/user"
+import profileQuery from "../queries/profile"
 import todoQuery from "../queries/todo"
-
-import resolvers from "../resolvers/user"
 
 import { mergeSchemas } from "graphql-tools"
 
 export default mergeSchemas({
     schemas: [
         todoQuery,
-        userQuery
+        profileQuery
     ]
 });
