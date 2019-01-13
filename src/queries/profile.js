@@ -1,5 +1,5 @@
 export default  `
-type Query {
+extend type Query {
     profile (id: Int!) : Profile
 }
 `

@@ -8,7 +8,16 @@ import profileQuery from "../queries/profile"
 
 import profileResolver from "../resolvers/profile"
 
+import userQuery from "../queries/user"
+import userType from "../types/user"
+
+const queryType = `
+type Query {
+    _empty: String
+}
+`
+
 export default makeExecutableSchema({
-    typeDefs: [addressType, profileType, profileQuery],
+    typeDefs: [queryType , addressType, profileType, userType, userQuery, profileQuery],
     resolvers: [profileResolver]
 })
