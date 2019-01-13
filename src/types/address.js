@@ -1,4 +1,4 @@
-export const addressType = `
+export default `
 enum CountryAllowed {
     IN,
     US
