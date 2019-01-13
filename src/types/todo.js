@@ -2,6 +2,7 @@ export default `
 type Todo {
     task: String,
     isComplete: Boolean,
-    date: Int
+    date: Int,
+    id: ID
 }
 `

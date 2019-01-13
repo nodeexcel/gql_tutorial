@@ -13,6 +13,7 @@ import userQuery from "../queries/user"
 import userType from "../types/user"
 
 import profileMutation from "../mutations/profile"
+import todoMutation from "../mutations/todo"
 
 const queryType = `
 type Query {
@@ -41,7 +42,8 @@ const schema = makeExecutableSchema({
         todoType,
         todoQuery,
         mutationType,
-        profileMutation],
+        profileMutation,
+        todoMutation],
     resolvers: [profileResolver, userResolver]
 })
 
