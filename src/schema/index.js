@@ -15,6 +15,8 @@ import userType from "../types/user"
 import profileMutation from "../mutations/profile"
 import todoMutation from "../mutations/todo"
 
+import todoSubscription from "../subscriptions/todo"
+
 const queryType = `
 type Query {
     _empty: String
@@ -43,7 +45,8 @@ const schema = makeExecutableSchema({
         todoQuery,
         mutationType,
         profileMutation,
-        todoMutation],
+        todoMutation,
+        todoSubscription],
     resolvers: [profileResolver, userResolver]
 })
 
