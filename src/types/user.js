@@ -1,4 +1,5 @@
 export default `
 type User {
-    profile: Profile
+    profile: Profile,
+    todo: [Todo]
 }`
