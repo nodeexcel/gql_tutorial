@@ -6,6 +6,7 @@ import profileQuery from "../queries/profile"
 
 import profileResolver from "../resolvers/profile"
 import userResolver from "../resolvers/user"
+import todoResolver from "../resolvers/todo"
 
 import userQuery from "../queries/user"
 import userType from "../types/user"
@@ -44,7 +45,7 @@ export const typeDefs = [
     todoMutation,
     todoSubscription]
 
-export const resolvers = [profileResolver, userResolver]
+export const resolvers = [profileResolver, userResolver, todoResolver]
 
 // addMockFunctionsToSchema({
 //     schema: schema,
