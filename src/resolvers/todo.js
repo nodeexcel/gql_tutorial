@@ -23,6 +23,24 @@ export default {
             input.id = id
             todos.push(input)
             return input
+        },
+        updateTodo: (_, { input }) => {
+            let id = input.id
+            let updatedTodo = null
+            todos = todos.map((todo) => {
+                if (todo.id == id) {
+                    updatedTodo = todo
+                    if (input.task)
+                        todo.task = input.task
+
+                    if (typeof input.isComplete == "boolean")
+                        todo.isComplete = input.isComplete
+                }
+                return todo
+            })
+            if (!updatedTodo)
+                throw new Error("Invalid ID. ID Not Found")
+            return updatedTodo
         }
     }
 }
