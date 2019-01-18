@@ -4,7 +4,7 @@ let todos = []
 export default {
     Subscription: {
         todoAdded: {
-            subscribe: () => pubsub.asyncIterator('commentAdded')
+            subscribe: () => pubsub.asyncIterator('TODO_ADDED')
         }
     },
     Query: {
@@ -22,6 +22,7 @@ export default {
             let id = Math.round(Math.random(0, 1000) * 1000)
             input.id = id
             todos.push(input)
+            pubsub.publish('TODO_ADDED', { postAdded: input });
             return input
         },
         updateTodo: (_, { input }) => {
